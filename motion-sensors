@@ -155,17 +155,18 @@ void loop(){
   distance1=distanceMeasure(trigPin1, echoPin1);
   distance2=distanceMeasure(trigPin2, echoPin2);
 
-  if(distance1 < initialDistance1 && sequence.charAt(0) != '1') {
+  
+  if(distance1 < initialDistance1 && sequence.charAt(0) != '1') {   //12 -> walked in
     sequence += "1";
-  } else if(distance2 < initialDistance2 && sequence.charAt(0) != '2') {
+  } else if(distance2 < initialDistance2 && sequence.charAt(0) != '2') {    //21 -> walked out
     sequence += "2";
   }
-  if(sequence.equals("12")) {
+  if(sequence.equals("12")) {   //12 -> walked in
     currentPeople++;
     sequence="";
     delay(550);
   }
-  else if(sequence.equals("21") && currentPeople > 0) {
+  else if(sequence.equals("21") && currentPeople > 0) {   //21 -> walked out
     currentPeople--;
     sequence="";
     delay(550);
@@ -197,9 +198,8 @@ void loop(){
 //    noTone(buzzerPin);
 //  }
 
-  int x=1;
 
-  if(currentPeople==maxCap && x==1) {
+  if(currentPeople==maxCap) {
     lcd.clear();
     lcd.print("reached max cap!");
     lcd.setCursor(0,1) ;
